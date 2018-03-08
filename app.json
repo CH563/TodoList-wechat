@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#ca2100",
+    "navigationBarTitleText": "Todolist",
+    "navigationBarTextStyle":"white"
+  }
+}

@@ -1,0 +1,99 @@
+<!--index.wxml-->
+<wxs module="m1">
+var formatTime = function(time){
+  // 获取当前时间
+  var getUnix = function () {
+    var date = new Date
+    return date.getTime()
+  }
+  // 获取今天零点时间
+  var getTodayUnix = function () {
+    var date = new Date()
+    date.setHours(0)
+    date.setMinutes(0)
+    date.setSeconds(0)
+    date.setMilliseconds(0)
+    return date.getTime()
+  }
+  // 获取今年的1月1日零点时间
+  var getYearUnix = function () {
+    var date = new Date()
+    date.setMonth(0)
+    date.setDate(1)
+    date.setHours(0)
+    date.setMinutes(0)
+    date.setSeconds(0)
+    date.setMilliseconds(0)
+    return date.getTime()
+  }
+  // 获取标准时间
+  var getLastDate = function (time) {
+    var date = new Date(time)
+    var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+    var day = date.getDay() < 10 ? '0' + (date.getDay()) : date.getDay()
+    return date.getFullYear() + '-' + month + '-' + day
+  }
+  // 转换时间
+  var getFormatTime = function (timestamp) {
+    var now = getUnix()
+    var today = getTodayUnix()
+    var year = getYearUnix()
+    var timer = (now - timestamp) / 1000
+    var tip = ''
+    if (timer <= 0) {
+      tip = '刚刚'
+    } else if (Math.floor(timer / 60) <= 0) {
+      tip = '刚刚'
+    } else if (timer < 3600) {
+      tip = Math.floor(timer / 60) + '分钟前'
+    } else if (timer >= 3600 && (timestamp - today >= 0)) {
+      tip = Math.floor(timer / 3600) + '小时前'
+    } else if (timer / 86400 <= 31) {
+      tip = Math.ceil(timer / 86400) + '天前'
+    } else {
+      tip = getLastDate(timestamp)
+    }
+    return tip
+  }
+  return getFormatTime(time)
+}
+
+module.exports.formatTime = formatTime;
+</wxs>
+<view class="container">
+  <view class="userinfo">
+    <button size="mini" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="titleBar">
+    <view class="status">
+      <text class="{{status === '1'?'active':''}}" data-status="1" bindtap="showStatus">全部</text>
+      <text class="{{status === '2'?'active':''}}" data-status="2" bindtap="showStatus">未完成</text>
+      <text class="{{status === '3'?'active':''}}" data-status="3" bindtap="showStatus">已完成</text>
+    </view>
+    <view class='add'>
+    <button class="mini-btn" type="warn" size="mini" bindtap="addTodoShow" formType="submit">+ 添加</button>
+    </view>
+  </view>
+  <scroll-view class="lists" scroll-y>
+    <block wx:if="{{curLists.length < 1}}">
+      <view class="nodata">暂无数据</view>
+    </block>
+    <view class="item" wx:for="{{curLists}}" wx:key="index">
+      <icon class="icon-small" type="{{item.status === '0'?'circle':'success'}}" size="23" data-item="{{item.id}}" bindtap="changeTodo"></icon>
+      <text class="{{item.status === '1'?'over':''}}">{{item.title}}-{{m1.formatTime({{id}})}}</text>
+    </view>
+  </scroll-view>
+  <view class="addForm {{addShow?'':'hide'}}">
+    <view class="addForm-div">
+      <input class="weui-input" placeholder="请输入todo" value="{{addText}}" bindinput="setInput" focus="{{focus}}" />
+      <view class="addForm-btn">
+        <button class="weui-btn mini-btn" type="primary" bindtap="addTodo" size="mini">确定添加</button>
+        <button class="weui-btn mini-btn" type="default" bindtap="addTodoHide" size="mini">取消</button>
+      </view>
+    </view>
+  </view>
+</view>

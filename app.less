@@ -1,0 +1,131 @@
+@import "../weui.wxss";
+
+/**app.wxss**/
+
+.container {
+  padding: 30rpx 30rpx 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.userinfo {
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 0 0 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userinfo-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 15rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #666;
+  font-size: 11pt;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.titleBar {
+  flex-shrink: 0;
+  display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 0 10rpx 10rpx;
+  align-items: center;
+}
+
+.titleBar .status {
+  flex: 1;
+  .add {
+    overflow: hidden;
+  }
+  
+  .add button {
+    margin: 0;
+    float: right;
+  }
+  
+  text {
+    display: inline;
+    font-size: 12pt;
+    color: #999;
+    padding: 10rpx 20rpx 10rpx 0;
+    margin-right: 15rpx;
+      &.active {
+        color: #ca2100;
+      }
+  }
+}
+
+
+.lists {
+  height: 0;
+  flex: 1;
+  padding-top: 15rpx;
+  padding-bottom: 10rpx;
+  .item {
+    padding: 10rpx;
+    border-bottom: 1px dotted #eee;
+    icon{
+      padding: 0 8rpx;
+    }
+  }
+  
+  .item text {
+    font-size: 11pt;
+    color: #444;
+    padding: 0 10rpx;
+  }
+  
+  .item text.over {
+    text-decoration: line-through;
+    color: #999;
+  }
+}
+.addForm{
+  position: absolute;
+  top:0;
+  left:0;
+  right: 0;
+  bottom:0;
+  background: rgba(0,0,0,.4);
+  z-index: 99;
+  &.hide{
+    display: none;
+  }
+  .addForm-div{
+    background: #fff;
+    padding: 30rpx;
+    .weui-input{
+      border:1px solid #ccc;
+      border-radius: 5px;
+      padding: 5rpx 20rpx;
+      font-size: 12pt;
+      margin-bottom: 10rpx;
+    }
+    .addForm-btn{
+      button{
+        margin-right: 15rpx;
+      }
+    }
+  }
+}
+.nodata{
+  padding: 30rpx;
+  color:#999;
+  font-size: 11pt;
+  text-align: center;
+  font-style: italic;
+}
