@@ -132,6 +132,15 @@ Page({
       curLists: this.data.lists.filter(item => +item.status === (st - 2))
     })
   },
+  touchS: function (e) {
+    console.log('开始：' + JSON.stringify(e))
+  },
+  touchM: function (e) {
+    console.log('移动：' + JSON.stringify(e))
+  },
+  touchE: function (e) {
+    console.log('停止：' + JSON.stringify(e))
+  },
   // onPullDownRefresh:function()
   // {
   //   wx.showNavigationBarLoading() //在标题栏中显示加载

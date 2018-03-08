@@ -1042,7 +1042,7 @@ icon {
 }
 /**app.wxss**/
 .container {
-  padding: 30rpx 30rpx 0;
+  padding: 30rpx 0 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -1076,7 +1076,7 @@ icon {
   flex-shrink: 0;
   display: flex;
   border-bottom: 1px solid #eee;
-  padding: 0 10rpx 10rpx;
+  padding: 0 30rpx 10rpx;
   align-items: center;
 }
 .titleBar .status {
@@ -1106,11 +1106,54 @@ icon {
   padding-bottom: 10rpx;
 }
 .lists .item {
-  padding: 10rpx;
   border-bottom: 1px dotted #eee;
+  position: relative;
+}
+.lists .item .content {
+  padding: 15rpx 30rpx;
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 0;
+  top: 0;
+  transition: left .3s;
+  width: 694rpx;
+  z-index: 10;
+  background: #fff;
 }
 .lists .item icon {
-  padding: 0 8rpx;
+  padding: 10rpx;
+  flex-shrink: 0;
+}
+.lists .item .title {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+.lists .item .time {
+  font-size: 9pt;
+  color: #999;
+  flex-shrink: 0;
+}
+.lists .item .tool {
+  position: absolute;
+  z-index: 9;
+  right: 0;
+  top: 0;
+}
+.lists .item .tool .edit,
+.lists .item .tool .del {
+  font-size: 9pt;
+  display: inline-block;
+  line-height: 90rpx;
+  padding: 0 30rpx;
+  color: #fff;
+  background: #aaa;
+}
+.lists .item .tool .del {
+  background: crimson;
 }
 .lists .item text {
   font-size: 11pt;

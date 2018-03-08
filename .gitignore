@@ -45,3 +45,4 @@ jspm_packages
 .DS_Store
 
 .idea
+project.config.json
