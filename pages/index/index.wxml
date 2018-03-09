@@ -15,7 +15,7 @@
       <text class="{{status === '3'?'active':''}}" data-status="3" bindtap="showStatus">已完成</text>
     </view>
     <view class='add'>
-    <button class="mini-btn" type="warn" size="mini" bindtap="addTodoShow" formType="submit">+ 添加</button>
+    <button class="mini-btn" type="warn" size="mini" bindtap="addTodoShow">+ 添加</button>
     </view>
   </view>
   <scroll-view class="lists" scroll-y>
