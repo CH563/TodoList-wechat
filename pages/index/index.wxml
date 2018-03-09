@@ -23,15 +23,12 @@
       <view class="nodata">暂无数据</view>
     </block>
     <view class="item" wx:for="{{curLists}}" wx:key="index">
-      <view class="content" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE">
+      <view class="content" style="{{item.txtStyle}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE">
         <icon class="icon-small" type="{{item.status === '0'?'circle':'success'}}" size="23" data-item="{{item.id}}" bindtap="changeTodo"></icon>
         <text class="title {{item.status === '1'?'over':''}}">{{item.title}}</text>
         <text class="time">{{api.formatTime(item.id)}}</text>
       </view>
-      <view class="tool">
-        <view class="edit">编辑</view>
-        <view class="del">删除</view>
-      </view>
+      <view class="del" data-item="{{item.id}}" bindtap="delTodo"><text>删除</text></view>
     </view>
   </scroll-view>
   <view class="addForm {{addShow?'':'hide'}}">

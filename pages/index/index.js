@@ -13,6 +13,8 @@ Page({
     focus: false,
     lists: [],
     curLists: [],
+    editIndex: 0,
+    delBtnWidth: 120, // 删除按钮宽度单位（rpx）
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
@@ -60,7 +62,7 @@ Page({
           })
         }
       }
-    });
+    })
     console.log(item)
   },
   addTodoShow: function () {
@@ -133,13 +135,96 @@ Page({
     })
   },
   touchS: function (e) {
-    console.log('开始：' + JSON.stringify(e))
+    // console.log('开始：' + JSON.stringify(e))
+    // 是否只有一个触摸点
+    if(e.touches.length === 1){
+      this.setData({
+        // 触摸起始的X坐标
+        startX: e.touches[0].clientX
+      })
+    }
   },
   touchM: function (e) {
-    console.log('移动：' + JSON.stringify(e))
+    // console.log('移动：' + JSON.stringify(e))
+    var _this = this
+    if(e.touches.length === 1){
+     // 触摸点的X坐标
+      var moveX = e.touches[0].clientX
+      // 计算手指起始点的X坐标与当前触摸点的X坐标的差值
+      var disX = _this.data.startX - moveX
+     // delBtnWidth 为右侧按钮区域的宽度
+      var delBtnWidth = _this.data.delBtnWidth
+      var txtStyle = ''
+      if (disX == 0 || disX < 0){ // 如果移动距离小于等于0，文本层位置不变
+        txtStyle = 'left:0'
+      } else if (disX > 0 ){ // 移动距离大于0，文本层left值等于手指移动距离
+        txtStyle = 'left:-' + disX + 'rpx'
+        if(disX >= delBtnWidth){
+          // 控制手指移动距离最大值为删除按钮的宽度
+          txtStyle = 'left:-' + delBtnWidth + 'rpx'
+        }
+      }
+      // 获取手指触摸的是哪一个item
+      var index = e.currentTarget.dataset.index;
+      var list = _this.data.curLists
+      // 将拼接好的样式设置到当前item中
+      list[index].txtStyle = txtStyle
+      // 更新列表的状态
+      this.setData({
+        curLists: list
+      });
+    }
   },
   touchE: function (e) {
-    console.log('停止：' + JSON.stringify(e))
+    // console.log('停止：' + JSON.stringify(e))
+    var _this = this
+    if(e.changedTouches.length === 1){
+      // 手指移动结束后触摸点位置的X坐标
+      var endX = e.changedTouches[0].clientX
+      // 触摸开始与结束，手指移动的距离
+      var disX = _this.data.startX - endX
+      var delBtnWidth = _this.data.delBtnWidth
+      // 如果距离小于删除按钮的1/2，不显示删除按钮
+      var txtStyle = disX > delBtnWidth/2 ? 'left:-' + delBtnWidth + 'rpx' : 'left:0'
+      // 获取手指触摸的是哪一项
+      var index = e.currentTarget.dataset.index
+      var list = _this.data.curLists
+      list[index].txtStyle = txtStyle
+      // 更新列表的状态
+      _this.setData({
+        curLists: list
+      });
+    }
+  },
+  delTodo: function (e) {
+    var _this = this
+    var item = e.currentTarget.dataset.item
+    var temp = _this.data.lists
+    temp.forEach( (el, index) => {
+      if (el.id === item) {
+        temp[index].txtStyle = 'left:0'
+        wx.showModal({
+          title: '',
+          content: '您确定要删除吗？',
+          confirmText: "确定",
+          cancelText: "考虑一下",
+          success: function (res) {
+            if (res.confirm) {
+                temp.splice(index, 1)
+                _this.showCur(temp)
+                wx.setStorage({
+                  key:"lists",
+                  data: temp
+                })
+            } else {
+                _this.showCur(temp)
+                return console.log('不操作')
+              }
+          }
+        })
+      }
+    })
+    
   },
   // onPullDownRefresh:function()
   // {

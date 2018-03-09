@@ -1108,6 +1108,7 @@ icon {
 .lists .item {
   border-bottom: 1px dotted #eee;
   position: relative;
+  overflow: hidden;
 }
 .lists .item .content {
   padding: 15rpx 30rpx;
@@ -1122,7 +1123,7 @@ icon {
   background: #fff;
 }
 .lists .item icon {
-  padding: 10rpx;
+  padding: 15rpx 10rpx;
   flex-shrink: 0;
 }
 .lists .item .title {
@@ -1137,23 +1138,22 @@ icon {
   color: #999;
   flex-shrink: 0;
 }
-.lists .item .tool {
+.lists .item .del {
   position: absolute;
   z-index: 9;
   right: 0;
   top: 0;
+  bottom: 0;
+  background: #f53b60;
+  width: 120rpx;
+  display: flex;
+  align-items: center;
 }
-.lists .item .tool .edit,
-.lists .item .tool .del {
+.lists .item .del text {
+  text-align: center;
   font-size: 9pt;
-  display: inline-block;
-  line-height: 90rpx;
-  padding: 0 30rpx;
   color: #fff;
-  background: #aaa;
-}
-.lists .item .tool .del {
-  background: crimson;
+  flex: 1;
 }
 .lists .item text {
   font-size: 11pt;

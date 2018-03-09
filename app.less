@@ -78,6 +78,7 @@
   .item {
     border-bottom: 1px dotted #eee;
     position: relative;
+    overflow: hidden;
     .content{
       padding: 15rpx 30rpx;
       display: flex;
@@ -91,7 +92,7 @@
       background: #fff;
     }
     icon{
-      padding: 10rpx;
+      padding: 15rpx 10rpx;
       flex-shrink: 0;
     }
     .title{
@@ -106,21 +107,21 @@
       color:#999;
       flex-shrink: 0;
     }
-    .tool{
+    .del{
       position: absolute;
       z-index: 9;
       right:0;
       top:0;
-      .edit,.del{
+      bottom:0;
+      background: rgb(245, 59, 96);
+      width: 120rpx;
+      display: flex;
+      align-items: center;
+      text{
+        text-align: center;
         font-size: 9pt;
-        display: inline-block;
-        line-height: 90rpx;
-        padding:0 30rpx;
         color:#fff;
-        background: #aaa;
-      }
-      .del{
-        background: crimson;
+        flex:1;
       }
     }
   }
