@@ -16,8 +16,4 @@ clone下来，导出微信开发者工具即可运行
 
 实现效果如下：
 
-![效果图](https://raw.githubusercontent.com/ch563/TodoList-wechat/master/img/01.png)
-
-![效果图](https://raw.githubusercontent.com/ch563/TodoList-wechat/master/img/02.png)
-
-![效果图](https://raw.githubusercontent.com/ch563/TodoList-wechat/master/img/03.png)
+![效果图](https://raw.githubusercontent.com/ch563/TodoList-wechat/master/demo.gif)
